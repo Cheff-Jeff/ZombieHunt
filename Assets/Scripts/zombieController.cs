@@ -30,7 +30,10 @@ public class zombieController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Player.isDead == false)
+        {
+            eatPlayer();
+        }
     }
 
     public void changeHealth(int amount)

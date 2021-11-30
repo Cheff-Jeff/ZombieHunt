@@ -7,11 +7,8 @@ public class playerController : MonoBehaviour
     public string playerName;
     public int maxHP = 3;
     private int currentHP;
-    public int HP 
-    {
-        get {return currentHP;}
-    }
-    public bool isDead = false;
+    public int HP {get {return currentHP;}}
+    public bool isDead {get; private set;}
 
     private int totalExp = 0;
 
@@ -20,6 +17,7 @@ public class playerController : MonoBehaviour
     {
         Cursor.visible = false;
         currentHP = maxHP;
+        isDead = false;
     }
 
     // Update is called once per frame
@@ -30,14 +28,19 @@ public class playerController : MonoBehaviour
     }
 
     public void changeHealth(int amount)
-    { 
-        if(!isDead)
+    {
+        if (!isDead)
         {
             currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
             if (currentHP == 0)
             {
                 isDead = true;
             }
+            Debug.Log(currentHP);
+        }
+        else
+        {
+            Debug.Log("Dood");
         }
     }
 
