@@ -4,7 +4,6 @@ using UnityEngine;
 public class ArduinoToUnity : MonoBehaviour
 {
     SerialPort sp;
-    float lastMove;
     void Start()
     {
         string the_com = "";
@@ -16,6 +15,7 @@ public class ArduinoToUnity : MonoBehaviour
         sp = new SerialPort("\\\\.\\" + the_com, 115200);
         if (!sp.IsOpen)
         {
+            print("Opening " + the_com + ", baud 9600");
             sp.Open();
             sp.ReadTimeout = 50;
             sp.Handshake = Handshake.None;
@@ -27,9 +27,15 @@ public class ArduinoToUnity : MonoBehaviour
     void Update()
     {
         string val = sp.ReadLine();
-        float Move = float.Parse(val);
-        transform.position = new Vector2(-1, Move);
-        lastMove = Move;
+        string[] Move = val.Split(',');
+        if (Move[0] != "" && Move[1] != "")
+        {
+            Debug.Log("Run");
+            Vector2 rot = new Vector2(float.Parse(Move[1]), float.Parse(Move[0]));
+            transform.position = rot;
+        }
+
 
     }
 }
+
