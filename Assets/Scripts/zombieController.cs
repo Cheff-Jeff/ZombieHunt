@@ -50,6 +50,15 @@ public class zombieController : MonoBehaviour
         }
     }
 
+    //void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    Debug.Log("Test");
+    //    Vector2 oldMovement = movement;
+    //    movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+    //    timeLeft += time;
+    //    rb.AddForce(movement * maxSpeed);
+    //}
+
     void FixedUpdate()
     {
         rb.AddForce(movement * maxSpeed);

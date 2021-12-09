@@ -97,11 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc5d08d4c5c20749bc2d450b0a155f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainCamera: {fileID: 1539722684733471493, guid: f36fb7b3d856f5146b271534e965a299, type: 3}
   maxHP: 100
   exp: 20
   time: 2
-  maxSpeed: 1
+  maxSpeed: 0.5
 --- !u!61 &7362414372263290244
 BoxCollider2D:
   m_ObjectHideFlags: 0

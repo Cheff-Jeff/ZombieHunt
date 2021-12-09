@@ -14,16 +14,17 @@ public class Lvl1Loader : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 
     private void spawnZombie(int amount)
     {
         for (int i = 0; i < amount; i++)
         {
             Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
+            screenPosition.y = 3;
             Instantiate(zombie, screenPosition, Quaternion.identity);
         }
     }
