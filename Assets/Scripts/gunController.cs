@@ -21,18 +21,17 @@ public class gunController : MonoBehaviour
         currentClip = magazine;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Reload()
     {
         currentClip = magazine;
     }
 
-    public int Shoot()
+    void OnMouseDown()
+    {
+        Shoot();
+    }
+
+    public void Shoot()
     {
         if (clip == 0)
         {
@@ -40,6 +39,6 @@ public class gunController : MonoBehaviour
         }
 
         currentClip--;
-        return damage;
+        Debug.Log("clip "+currentClip);
     }
 }

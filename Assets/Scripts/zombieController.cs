@@ -19,12 +19,13 @@ public class zombieController : MonoBehaviour
     gunController Gun;
     playerController Player;
     Rigidbody2D rb;
-    zombieController zombie;
 
-    public float time = 2f;
     public float maxSpeed = 5f;
-    private Vector2 movement;
-    private float timeLeft;
+    public float changeTime = 3.0f;
+    float timer;
+    int direction;
+
+    public bool inRange = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,16 +34,25 @@ public class zombieController : MonoBehaviour
         Player = GameObject.Find("CrossHair").GetComponent<playerController>();
         rb = GetComponent<Rigidbody2D>();
         currentHP = maxHP;
+        timer = changeTime;
+        direction = getRandomNum();
     }
 
     // Update is called once per frame
     void Update()
     {
-        timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0)
+        timer -= Time.deltaTime;
+        if (timer < 0)
         {
-            movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-            timeLeft += time;
+            direction = -direction;
+            timer = changeTime;
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (inRange)
+            {
+                changeHealth(Gun.damage);
+            }
         }
         if (Player.isDead == false)
         {
@@ -50,18 +60,57 @@ public class zombieController : MonoBehaviour
         }
     }
 
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    Debug.Log("Test");
-    //    Vector2 oldMovement = movement;
-    //    movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-    //    timeLeft += time;
-    //    rb.AddForce(movement * maxSpeed);
-    //}
-
     void FixedUpdate()
     {
-        rb.AddForce(movement * maxSpeed);
+        Vector2 position = rb.position;
+        position.x = position.x + Time.deltaTime * maxSpeed * direction;
+        rb.MovePosition(position);
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        gunController gunCheck = collision.gameObject.GetComponent<gunController>();
+        if (gunCheck != null)
+        {
+            inRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        gunController gunCheck = collision.gameObject.GetComponent<gunController>();
+        if (gunCheck != null)
+        {
+            inRange = false;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (direction > 0)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = 1;
+        }
+    }
+
+    int getRandomNum()
+    {
+        bool correctValue = false;
+        int num = 0;
+        while (!correctValue)
+        {
+            num = Random.Range(-1, 1);
+            if (num == -1 || num == 1)
+            {
+                correctValue = true;
+            }
+        }
+
+        return num;
     }
 
     public void changeHealth(int amount)
@@ -79,18 +128,18 @@ public class zombieController : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
-    {
-        getShot();
-    }
+    //private void OnMouseDown()
+    //{
+    //    Debug.Log(inRange);
+        
+    //}
 
-    //click
-    public void getShot()
-    {
-        int damage = Gun.Shoot();
+    //public void getShot()
+    //{
+    //    int damage = Gun.Shoot();
 
-        changeHealth(damage);
-    }
+    //    changeHealth(damage);
+    //}
 
     public void eatPlayer()
     {
