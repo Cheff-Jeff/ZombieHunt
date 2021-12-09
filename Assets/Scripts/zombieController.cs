@@ -47,7 +47,7 @@ public class zombieController : MonoBehaviour
             direction = -direction;
             timer = changeTime;
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || ArduinoToUnity.getButtonState() == 1)
         {
             if (inRange)
             {
