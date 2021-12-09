@@ -36,7 +36,7 @@ public class playerController : MonoBehaviour
             {
                 isDead = true;
             }
-            Debug.Log(currentHP);
+            Debug.Log("Speler HP" + currentHP);
         }
         else
         {
@@ -47,7 +47,6 @@ public class playerController : MonoBehaviour
     public void changeExp(int amount)
     {
         totalExp = totalExp + amount;
-        Debug.Log("Hier");
-        Debug.Log(totalExp);
+        Debug.Log("Speler XP" + totalExp);
     }
 }

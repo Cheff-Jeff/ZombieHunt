@@ -18,22 +18,41 @@ public class zombieController : MonoBehaviour
 
     gunController Gun;
     playerController Player;
+    Rigidbody2D rb;
+    zombieController zombie;
+
+    public float time = 2f;
+    public float maxSpeed = 5f;
+    private Vector2 movement;
+    private float timeLeft;
 
     // Start is called before the first frame update
     void Start()
     {
         Gun = GameObject.Find("CrossHair").GetComponent<gunController>();
         Player = GameObject.Find("CrossHair").GetComponent<playerController>();
+        rb = GetComponent<Rigidbody2D>();
         currentHP = maxHP;
     }
 
     // Update is called once per frame
     void Update()
     {
+        timeLeft -= Time.deltaTime;
+        if (timeLeft <= 0)
+        {
+            movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            timeLeft += time;
+        }
         if (Player.isDead == false)
         {
             eatPlayer();
         }
+    }
+
+    void FixedUpdate()
+    {
+        rb.AddForce(movement * maxSpeed);
     }
 
     public void changeHealth(int amount)
@@ -47,7 +66,7 @@ public class zombieController : MonoBehaviour
                 isDead = true;
                 die();
             }
-            Debug.Log(currentHP);
+            Debug.Log("zombie HP" + currentHP);
         }
     }
 
@@ -72,5 +91,6 @@ public class zombieController : MonoBehaviour
     public void die()
     {
         Player.changeExp(exp);
+        Destroy(gameObject);
     }
 }
