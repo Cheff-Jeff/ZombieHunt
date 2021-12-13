@@ -26,6 +26,7 @@ public class zombieController : MonoBehaviour
     int direction;
 
     public bool inRange = false;
+    bool hit = false;
 
     // Start is called before the first frame update
     void Start()
@@ -62,9 +63,15 @@ public class zombieController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 position = rb.position;
-        position.x = position.x + Time.deltaTime * maxSpeed * direction;
-        rb.MovePosition(position);
+        if (!hit)
+        {
+            Vector2 position = rb.position;
+            position.x = position.x + Time.deltaTime * maxSpeed * direction;
+            rb.MovePosition(position);
+        }
+        else {
+        
+        }
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -127,19 +134,6 @@ public class zombieController : MonoBehaviour
             Debug.Log("zombie HP" + currentHP);
         }
     }
-
-    //private void OnMouseDown()
-    //{
-    //    Debug.Log(inRange);
-        
-    //}
-
-    //public void getShot()
-    //{
-    //    int damage = Gun.Shoot();
-
-    //    changeHealth(damage);
-    //}
 
     public void eatPlayer()
     {
