@@ -20,13 +20,6 @@ public class playerController : MonoBehaviour
         isDead = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Vector2 mouseCursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = mouseCursorPos;
-    }
-
     public void changeHealth(int amount)
     {
         if (!isDead)
