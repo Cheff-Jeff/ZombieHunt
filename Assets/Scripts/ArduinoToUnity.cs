@@ -14,7 +14,7 @@ public class ArduinoToUnity : MonoBehaviour
             print(mysps);
             if (mysps != "COM1") { the_com = mysps; break; }
         }
-        sp = new SerialPort("\\\\.\\" + the_com, 115200);
+        sp = new SerialPort("\\\\.\\" + the_com, 9600);
         if (!sp.IsOpen)
         {
             print("Opening " + the_com + ", baud 9600");

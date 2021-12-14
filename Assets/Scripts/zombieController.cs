@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class zombieController : MonoBehaviour
 {
+    //The X positions of the path
+    float pathLeft = 1;
+    float pathRight = 1.75f;
+
+    //timers for zombie
+    float attackTimer;
+    public float attackCooldown;
+    float onPathSpeed;
+
     public int maxHP = 100;
     private int currentHP;
     public int HP 
@@ -19,6 +28,8 @@ public class zombieController : MonoBehaviour
     gunController Gun;
     playerController Player;
     Rigidbody2D rb;
+    Transform trans;
+    Renderer rend;
 
     public float maxSpeed = 5f;
     public float changeTime = 3.0f;
@@ -34,9 +45,12 @@ public class zombieController : MonoBehaviour
         Gun = GameObject.Find("CrossHair").GetComponent<gunController>();
         Player = GameObject.Find("CrossHair").GetComponent<playerController>();
         rb = GetComponent<Rigidbody2D>();
+        trans = GetComponent<Transform>(); //transform for object size manipulation
+        rend = GetComponent<Renderer>(); //to change layer order
         currentHP = maxHP;
         timer = changeTime;
         direction = getRandomNum();
+        attackTimer = Time.time + Random.Range(5, 15);
     }
 
     // Update is called once per frame
@@ -55,9 +69,42 @@ public class zombieController : MonoBehaviour
                 changeHealth(Gun.damage);
             }
         }
-        if (Player.isDead == false)
+
+        //if zombie is on path walk forward
+        if (currentHP != maxHP || Time.time > attackTimer)
         {
+            //make zombie go to path on hit or after a random time
+            if (direction < 0 && rb.position.x < pathLeft)
+            {
+                direction *= -1;
+            }
+            else if (direction > 0 && rb.position.x > pathRight)
+            {
+                direction *= -1;
+            }
+            if (trans.position.x >= 1 && trans.position.x <= 1.75 && trans.localScale.x < 0.75f && Time.time > onPathSpeed||trans.localScale.x > 0.4 && trans.localScale.x < 0.75 && Time.time > onPathSpeed)
+            {
+                onPathSpeed = Time.time + 0.08f;
+                direction = 0;
+                rend.sortingOrder = 6;
+                trans.localScale = new Vector2(trans.localScale.x * 1.05f, trans.localScale.y * 1.05f);
+                rb.position = new Vector2(rb.position.x, rb.position.y * 1.02f);
+
+            }
+            
+        }
+        
+
+        //check is zombie is close enough to damage player (checking for X size but Y is also possible)
+        if (Player.isDead == false && trans.localScale.x > 0.75f && Time.time > attackCooldown)
+        {
+            direction = getRandomNum();
+            //make zombie be able to walk to the left and rigth
+            pathLeft = -6;
+            pathRight = 6;
             eatPlayer();
+            Debug.Log("Player hit");
+            attackCooldown = Time.time + 5f; //cooldown van 5 seconden
         }
     }
 
@@ -65,12 +112,14 @@ public class zombieController : MonoBehaviour
     {
         if (!hit)
         {
+            //change direction if close to border (12)
+            if (direction > 0 && trans.position.x > 12 || direction < 0 && trans.position.x < -12)
+            {
+                direction *= -1;
+            }
             Vector2 position = rb.position;
             position.x = position.x + Time.deltaTime * maxSpeed * direction;
             rb.MovePosition(position);
-        }
-        else {
-        
         }
     }
 
