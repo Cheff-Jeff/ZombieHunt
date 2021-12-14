@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class playerController : MonoBehaviour
@@ -13,12 +12,13 @@ public class playerController : MonoBehaviour
     private int totalExp = 0;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Cursor.visible = false;
         currentHP = maxHP;
         isDead = false;
     }
+
 
     public void changeHealth(int amount)
     {
@@ -29,7 +29,7 @@ public class playerController : MonoBehaviour
             {
                 isDead = true;
             }
-            Debug.Log("Speler HP" + currentHP);
+            Debug.Log("Speler HP " + currentHP);
         }
         else
         {

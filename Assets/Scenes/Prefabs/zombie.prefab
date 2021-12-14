@@ -101,6 +101,7 @@ MonoBehaviour:
   exp: 20
   maxSpeed: 2
   changeTime: 4
+  inRange: 0
 --- !u!61 &7362414372263290244
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -111,7 +112,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.03527999, y: -0.05043292}
