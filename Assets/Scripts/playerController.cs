@@ -19,8 +19,6 @@ public class playerController : MonoBehaviour
         isDead = false;
     }
 
-    // Update is called once per frame
-    void Update(){}
 
     public void changeHealth(int amount)
     {
