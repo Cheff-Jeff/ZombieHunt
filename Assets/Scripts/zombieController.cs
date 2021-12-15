@@ -192,6 +192,7 @@ public class zombieController : MonoBehaviour
     public void die()
     {
         Player.changeExp(exp);
+        Player.killZombie();
         Destroy(gameObject);
     }
 }
