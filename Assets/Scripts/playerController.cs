@@ -11,7 +11,18 @@ public class playerController : MonoBehaviour
 
     private int totalExp = 0;
 
+    private GameObject hard;
+    private GameObject hard1;
+    private GameObject hard2;
+
     // Start is called before the first frame update
+    void Start()
+    {
+        hard = GameObject.Find("Heath");
+        hard1 = GameObject.Find("Heath (1)");
+        hard2 = GameObject.Find("Heath (2)");
+    }
+
     void Awake()
     {
         Cursor.visible = false;
@@ -25,6 +36,7 @@ public class playerController : MonoBehaviour
         if (!isDead)
         {
             currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
+            setHards();
             if (currentHP == 0)
             {
                 isDead = true;
@@ -34,6 +46,22 @@ public class playerController : MonoBehaviour
         else
         {
             Debug.Log("Dood");
+        }
+    }
+
+    private void setHards()
+    {
+        if (HP == 2)
+        {
+            hard2.active = false;
+        }
+        if (HP == 1)
+        { 
+            hard1.active = false;
+        }
+        if (HP == 0)
+        { 
+            hard.active = false;
         }
     }
 
