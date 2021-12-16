@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Lvl1Loader : MonoBehaviour
@@ -7,6 +5,10 @@ public class Lvl1Loader : MonoBehaviour
     // Start is called before the first frame update
     public GameObject zombie;
     public int normalZombies;
+    public int zombieAmount() //sending zombie amount
+    {
+        return normalZombies;
+    }
 
     void Start()
     {

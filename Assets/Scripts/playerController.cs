@@ -1,23 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
+    //for the retreaval of zombie amount
+    Lvl1Loader loader; 
+    private int amountZombiesLeft;
+
     public string playerName;
     public int maxHP = 3;
     private int currentHP;
     public int HP {get {return currentHP;}}
     public bool isDead {get; private set;}
-
-    private int totalExp = 0;
+    public int totalExp { get; private set;}
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        totalExp = 0;
+        loader = GameObject.Find("LevelParent").GetComponent<Lvl1Loader>();
+        amountZombiesLeft = loader.zombieAmount(); //gets the amount of zombies in the level
+        Debug.Log(amountZombiesLeft);
         Cursor.visible = false;
         currentHP = maxHP;
         isDead = false;
+    }
+
+    void Update()
+    {
+        if (amountZombiesLeft == 0)
+        {
+            SceneManager.LoadScene("WinScene");
+        }
+    } 
+
+    public void killZombie()
+    {
+        amountZombiesLeft--;
     }
 
     public void changeHealth(int amount)
@@ -28,8 +47,9 @@ public class playerController : MonoBehaviour
             if (currentHP == 0)
             {
                 isDead = true;
+                SceneManager.LoadScene("LoseScene"); //loads lose scene when player has died
             }
-            Debug.Log("Speler HP" + currentHP);
+            Debug.Log("Speler HP " + currentHP);
         }
         else
         {
