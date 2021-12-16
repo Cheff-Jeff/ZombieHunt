@@ -4,7 +4,9 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     //for the retreaval of zombie amount
-    Lvl1Loader loader; 
+    Lvl1Loader loader;
+    public GameObject playerSats;
+
     private int amountZombiesLeft;
 
     public string playerName;
@@ -14,7 +16,18 @@ public class playerController : MonoBehaviour
     public bool isDead {get; private set;}
     public int totalExp { get; private set;}
 
+    private GameObject hard;
+    private GameObject hard1;
+    private GameObject hard2;
+
     // Start is called before the first frame update
+    void Start()
+    {
+        hard = GameObject.Find("Heath");
+        hard1 = GameObject.Find("Heath (1)");
+        hard2 = GameObject.Find("Heath (2)");
+    }
+
     void Awake()
     {
         totalExp = 0;
@@ -30,6 +43,9 @@ public class playerController : MonoBehaviour
     {
         if (amountZombiesLeft == 0)
         {
+            PlayerExp playerExp = playerSats.GetComponent<PlayerExp>();
+            //playerExp.EndExp = totalExp;
+
             SceneManager.LoadScene("WinScene");
         }
     } 
@@ -44,6 +60,7 @@ public class playerController : MonoBehaviour
         if (!isDead)
         {
             currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
+            setHards();
             if (currentHP == 0)
             {
                 isDead = true;
@@ -61,5 +78,21 @@ public class playerController : MonoBehaviour
     {
         totalExp = totalExp + amount;
         Debug.Log("Speler XP" + totalExp);
+    }
+
+    private void setHards()
+    {
+        if (HP == 2)
+        {
+            hard2.active = false;
+        }
+        if (HP == 1)
+        {
+            hard1.active = false;
+        }
+        if (HP == 0)
+        {
+            hard.active = false;
+        }
     }
 }

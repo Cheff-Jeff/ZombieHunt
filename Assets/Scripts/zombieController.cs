@@ -33,9 +33,12 @@ public class zombieController : MonoBehaviour
 
     public float maxSpeed = 5f;
     public float changeTime = 3.0f;
+    public float inmune = 1f;
     float timer;
+    float iTime;
     int direction;
 
+    bool imune = false;
     public bool inRange = false;
     bool hit = false;
 
@@ -62,11 +65,19 @@ public class zombieController : MonoBehaviour
             direction = -direction;
             timer = changeTime;
         }
+        iTime -= Time.deltaTime;
+        if (iTime < 0)
+        {
+            imune = false;
+            iTime = inmune;
+        }
         if (Input.GetMouseButtonDown(0) || ArduinoToUnity.getButtonState() == 1)
         {
-            if (inRange)
+            if (inRange && !imune)
             {
                 changeHealth(Gun.damage);
+                iTime = inmune;
+                imune = true;
             }
         }
 
