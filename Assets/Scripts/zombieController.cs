@@ -73,6 +73,7 @@ public class zombieController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) || ArduinoToUnity.getButtonState() == 1)
         {
+            Gun.Shoot();
             if (inRange && !imune)
             {
                 changeHealth(Gun.damage);

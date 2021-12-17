@@ -69,10 +69,10 @@ public class gunController : MonoBehaviour
         Bullit5.active = true;
     }
 
-    void OnMouseDown()
-    {
-        Shoot();
-    }
+    //void OnMouseDown()
+    //{
+    //    Shoot();
+    //}
 
     public void Shoot()
     {
