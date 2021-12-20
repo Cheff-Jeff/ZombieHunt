@@ -1,21 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ResultScreenLoader : MonoBehaviour
 {
-
-    playerController Player;
-    TextMesh Xp;
-    public GameObject playerSats;
-    //Start is called before the first frame update
-    void Awake()
+    public TextMeshProUGUI TxtExp;
+    void Start()
     {
-        //Player = GameObject.Find("CrossHair").GetComponent<playerController>();
-        Xp = GameObject.Find("ExpValue").GetComponent<TextMesh>();
-        playerSats = GameObject.Find("PlayerStatsHolder");
-        PlayerExp playerExp = playerSats.GetComponent<PlayerExp>();
-        //Debug.Log(playerExp.EndExp);
-        //Xp.text = Player.totalExp.ToString();
+        TxtExp.text = PlayerExp.Exp.ToString();
     }
 
     public void home()
@@ -31,5 +23,4 @@ public class ResultScreenLoader : MonoBehaviour
     public void continu() {
         SceneManager.LoadScene(0); // index invullen 
     }
-
 }

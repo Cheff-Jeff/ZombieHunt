@@ -5,7 +5,6 @@ public class playerController : MonoBehaviour
 {
     //for the retreaval of zombie amount
     Lvl1Loader loader;
-    public GameObject playerSats;
 
     private int amountZombiesLeft;
 
@@ -43,9 +42,7 @@ public class playerController : MonoBehaviour
     {
         if (amountZombiesLeft == 0)
         {
-            PlayerExp playerExp = playerSats.GetComponent<PlayerExp>();
-            //playerExp.EndExp = totalExp;
-
+            PlayerExp.Exp = totalExp;
             SceneManager.LoadScene("WinScene");
         }
     } 
@@ -64,6 +61,7 @@ public class playerController : MonoBehaviour
             if (currentHP == 0)
             {
                 isDead = true;
+                PlayerExp.Exp = totalExp;
                 SceneManager.LoadScene("LoseScene"); //loads lose scene when player has died
             }
             Debug.Log("Speler HP " + currentHP);

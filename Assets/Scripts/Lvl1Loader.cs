@@ -15,12 +15,6 @@ public class Lvl1Loader : MonoBehaviour
         spawnZombie(normalZombies);
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
-
     private void spawnZombie(int amount)
     {
         for (int i = 0; i < amount; i++)
