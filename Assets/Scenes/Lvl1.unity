@@ -246,7 +246,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 551005884603195292, guid: 7cddf6c6e64e9924babae207c82d4b52, type: 3}
       propertyPath: normalZombies
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 551005884603195293, guid: 7cddf6c6e64e9924babae207c82d4b52, type: 3}
       propertyPath: m_RootOrder
