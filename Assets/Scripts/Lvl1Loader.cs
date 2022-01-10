@@ -12,6 +12,7 @@ public class Lvl1Loader : MonoBehaviour
 
     void Start()
     {
+
         spawnZombie(normalZombies);
     }
 
@@ -20,7 +21,7 @@ public class Lvl1Loader : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
-            screenPosition.y = -2.45f;
+            screenPosition.y = -1.95f;
             Instantiate(zombie, screenPosition, Quaternion.identity);
         }
     }
