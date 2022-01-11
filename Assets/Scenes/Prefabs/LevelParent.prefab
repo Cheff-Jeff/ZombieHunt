@@ -188,6 +188,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 551005884603195293}
     m_Modifications:
+    - target: {fileID: -4094677600412847944, guid: 09000d65321939e418da534fe81f58b8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1628299684507355549, guid: 09000d65321939e418da534fe81f58b8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2975500866550163765, guid: 09000d65321939e418da534fe81f58b8, type: 3}
       propertyPath: m_Name
       value: CrossHair
