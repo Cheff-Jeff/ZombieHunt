@@ -15,8 +15,10 @@ public class gunController : MonoBehaviour
 
     public float reloadDelay = 3f;
     public float shootDelay = 1f;
+    public float blinkTime = -2f;
     float rTimer;
     float sTimer;
+    float bTimer;
     public bool canShoot = true;
 
     private GameObject Bullit;
@@ -25,6 +27,8 @@ public class gunController : MonoBehaviour
     private GameObject Bullit3;
     private GameObject Bullit4;
     private GameObject Bullit5;
+
+    public GameObject screen;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +41,19 @@ public class gunController : MonoBehaviour
         Bullit3 = GameObject.Find("Bullit (3)");
         Bullit4 = GameObject.Find("Bullit (4)");
         Bullit5 = GameObject.Find("Bullit (5)");
+        screen = GameObject.Find("LevelParent");
     }
-    
+
+    void Update()
+    {
+        bTimer -= Time.deltaTime;
+        Debug.Log(bTimer);
+        if (bTimer < 0)
+        {
+            screen.GetComponent<Renderer>().material.color = Color.white;
+        }
+    }
+
     void FixedUpdate()
     {
         rTimer -= Time.deltaTime;
@@ -151,6 +166,8 @@ public class gunController : MonoBehaviour
             currentClip--;
             sTimer = shootDelay;
             canShoot = false;
+            bTimer = blinkTime;
+            screen.GetComponent<Renderer>().material.color = Color.black;
             upDateUIgun();
         }
     }

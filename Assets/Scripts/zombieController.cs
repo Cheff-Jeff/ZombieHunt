@@ -34,8 +34,11 @@ public class zombieController : MonoBehaviour
     public float maxSpeed = 5f;
     public float changeTime = 3.0f;
     public float inmune = 1f;
+    public float blink = 2f;
     float timer;
     float iTime;
+    float bTimer;
+    int blinknum = 0;
     int direction;
 
     bool imune = false;
@@ -73,6 +76,22 @@ public class zombieController : MonoBehaviour
         {
             imune = false;
             iTime = inmune;
+        }
+        bTimer -= Time.deltaTime;
+        if (bTimer > 0)
+        {
+            if (gameObject.GetComponent<Renderer>().material.color == Color.white)
+            {
+                gameObject.GetComponent<Renderer>().material.color = Color.red;
+            }
+            else
+            {
+                gameObject.GetComponent<Renderer>().material.color = Color.white;
+            }
+        }
+        else if (bTimer < 0)
+        { 
+            gameObject.GetComponent<Renderer>().material.color = Color.white;
         }
         if (Input.GetMouseButtonDown(0) || ArduinoToUnity.getButtonState() == 1)
         {
@@ -192,6 +211,7 @@ public class zombieController : MonoBehaviour
         if (!isDead)
         {
             currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
+            bTimer = blink;
             if (currentHP == 0)
             {
                 isDead = true;
