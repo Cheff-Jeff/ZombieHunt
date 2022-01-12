@@ -60,12 +60,11 @@ public class zombieController : MonoBehaviour
         direction = getRandomNum();
         attackTimer = Time.time + Random.Range(5, 15);
 
-        //als ie gelijk is aan null dan staat de arduino style aan in de CrossHair component
-        if ((playStyle.GetComponent("MouseDebug") as MouseDebug) == null)
+        if (playStyle.GetComponent<MouseDebug>().isActiveAndEnabled)
         {
             Player.style = false;
         }
-        else 
+        else if(playStyle.GetComponent<ArduinoToUnity>().isActiveAndEnabled) 
         {
             Player.style = true;
         }
@@ -74,7 +73,7 @@ public class zombieController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((playStyle.GetComponent("MouseDebug") as MouseDebug) == null)
+        if (playStyle.GetComponent<ArduinoToUnity>().isActiveAndEnabled)
         {
             //update bulletUI
             Gun.ArduinoAmoController(ArduinoToUnity.getArduinoMagazine());
@@ -107,13 +106,13 @@ public class zombieController : MonoBehaviour
         { 
             gameObject.GetComponent<Renderer>().material.color = Color.white;
         }
-        if (Input.GetMouseButtonDown(0) || ArduinoToUnity.getButtonState() == 1)
+        if (Input.GetMouseButtonDown(0))//|| ArduinoToUnity.getButtonState() == 1
         {
-            if ((playStyle.GetComponent("MouseDebug") as MouseDebug) == null)
+            if (playStyle.GetComponent<ArduinoToUnity>().isActiveAndEnabled)
             {
                 Gun.ArduinoAmoController(ArduinoToUnity.getArduinoMagazine());
             }
-            else 
+            else if (playStyle.GetComponent<MouseDebug>().isActiveAndEnabled)
             {
                 Gun.Shoot();
             }
