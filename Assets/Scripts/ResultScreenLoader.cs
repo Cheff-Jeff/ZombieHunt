@@ -3,10 +3,12 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class ResultScreenLoader : MonoBehaviour
 {
     public TextMeshProUGUI TxtExp;
+    public TextMeshProUGUI PlayerName;
     void Start()
     {
         TxtExp.text = PlayerExp.Exp.ToString();
@@ -27,7 +29,7 @@ public class ResultScreenLoader : MonoBehaviour
         {
             ArduinoToUnity.closePort();
         }
-        SceneManager.LoadScene(0); //index invullen
+        SceneManager.LoadScene(2); //index invullen
     }
 
     public void continu() {
@@ -36,13 +38,18 @@ public class ResultScreenLoader : MonoBehaviour
             ArduinoToUnity.closePort();
         }
 
+        if (PlayerName.text == "" || PlayerName.text == " ")
+        {
+            PlayerName.text = "Unknown walker";
+        }
+
         StartCoroutine(PostData_Coroutine());
 
         IEnumerator PostData_Coroutine()
         {
             string uri = "http://192.168.1.70:3000/sendscore";
             WWWForm form = new WWWForm();
-            form.AddField("name", "daan");
+            form.AddField("name", PlayerName.text);
             form.AddField("score", PlayerExp.Exp.ToString());
             using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
             {
@@ -52,7 +59,7 @@ public class ResultScreenLoader : MonoBehaviour
                 else
                     Debug.Log(request.downloadHandler.text);
             }
-            SceneManager.LoadScene(0); // index invullen 
         }
+        SceneManager.LoadScene(0); // index invullen 
     }
 }
