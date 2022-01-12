@@ -25,6 +25,7 @@ public class zombieController : MonoBehaviour
     private bool isDead = false;
     public int exp = 50;
 
+    GameObject playStyle;
     gunController Gun;
     playerController Player;
     Rigidbody2D rb;
@@ -50,6 +51,7 @@ public class zombieController : MonoBehaviour
     {
         Gun = GameObject.Find("CrossHair").GetComponent<gunController>();
         Player = GameObject.Find("CrossHair").GetComponent<playerController>();
+        playStyle = GameObject.Find("CrossHair");
         rb = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>(); //transform for object size manipulation
         rend = GetComponent<Renderer>(); //to change layer order
@@ -58,13 +60,25 @@ public class zombieController : MonoBehaviour
         direction = getRandomNum();
         attackTimer = Time.time + Random.Range(5, 15);
 
+        //als ie gelijk is aan null dan staat de arduino style aan in de CrossHair component
+        if ((playStyle.GetComponent("MouseDebug") as MouseDebug) == null)
+        {
+            Player.style = false;
+        }
+        else 
+        {
+            Player.style = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //update bulletUI
-        Gun.ArduinoAmoController(ArduinoToUnity.getArduinoMagazine());
+        if ((playStyle.GetComponent("MouseDebug") as MouseDebug) == null)
+        {
+            //update bulletUI
+            Gun.ArduinoAmoController(ArduinoToUnity.getArduinoMagazine());
+        }
         timer -= Time.deltaTime;
         if (timer < 0)
         {
@@ -95,9 +109,14 @@ public class zombieController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) || ArduinoToUnity.getButtonState() == 1)
         {
-            //Ik heb dit voorlopig disabled om mijn arduino magazine te testen
-            //Gun.Shoot();
-            Gun.ArduinoAmoController(ArduinoToUnity.getArduinoMagazine());
+            if ((playStyle.GetComponent("MouseDebug") as MouseDebug) == null)
+            {
+                Gun.ArduinoAmoController(ArduinoToUnity.getArduinoMagazine());
+            }
+            else 
+            {
+                Gun.Shoot();
+            }
             if (inRange && !imune)
             {
                 changeHealth(Gun.damage);
@@ -139,7 +158,6 @@ public class zombieController : MonoBehaviour
             pathLeft = -6;
             pathRight = 6;
             eatPlayer();
-            Debug.Log("Player hit");
             attackCooldown = Time.time + 5f; //cooldown van 5 seconden
         }
     }

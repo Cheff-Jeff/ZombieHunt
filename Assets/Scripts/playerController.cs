@@ -13,6 +13,7 @@ public class playerController : MonoBehaviour
     private int currentHP;
     public int HP {get {return currentHP;}}
     public bool isDead {get; private set;}
+    public bool style {get; set;}
     public int totalExp { get; private set;}
 
     private GameObject hard;
@@ -43,6 +44,7 @@ public class playerController : MonoBehaviour
         if (amountZombiesLeft == 0)
         {
             PlayerExp.Exp = totalExp;
+            PlayerExp.PlayStyle = style;
             SceneManager.LoadScene("WinScene");
         }
     } 
@@ -62,6 +64,7 @@ public class playerController : MonoBehaviour
             {
                 isDead = true;
                 PlayerExp.Exp = totalExp;
+                PlayerExp.PlayStyle = style;
                 SceneManager.LoadScene("LoseScene"); //loads lose scene when player has died   
             }
             Debug.Log("Speler HP " + currentHP);

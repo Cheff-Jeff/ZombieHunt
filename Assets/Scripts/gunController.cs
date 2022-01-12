@@ -47,7 +47,6 @@ public class gunController : MonoBehaviour
     void Update()
     {
         bTimer -= Time.deltaTime;
-        Debug.Log(bTimer);
         if (bTimer < 0)
         {
             screen.GetComponent<Renderer>().material.color = Color.white;
@@ -57,7 +56,6 @@ public class gunController : MonoBehaviour
     void FixedUpdate()
     {
         rTimer -= Time.deltaTime;
-        Debug.Log(canShoot);
         if (rTimer < 0)
         {
             canShoot = true;
@@ -167,13 +165,14 @@ public class gunController : MonoBehaviour
             sTimer = shootDelay;
             canShoot = false;
             bTimer = blinkTime;
-            screen.GetComponent<Renderer>().material.color = Color.black;
             upDateUIgun();
         }
     }
 
     private void upDateUIgun()
     {
+        Debug.Log("Test UI");
+        Debug.Log(clip);
         if (clip == 5)
         {
             Bullit5.active = false;

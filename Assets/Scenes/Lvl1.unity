@@ -1057,7 +1057,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 551005884603195292, guid: 7cddf6c6e64e9924babae207c82d4b52, type: 3}
       propertyPath: normalZombies
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 551005884603195293, guid: 7cddf6c6e64e9924babae207c82d4b52, type: 3}
       propertyPath: m_RootOrder
@@ -1138,6 +1138,14 @@ PrefabInstance:
     - target: {fileID: 3381792839271824138, guid: 7cddf6c6e64e9924babae207c82d4b52, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650345415117628036, guid: 7cddf6c6e64e9924babae207c82d4b52, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7981098715225629791, guid: 7cddf6c6e64e9924babae207c82d4b52, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cddf6c6e64e9924babae207c82d4b52, type: 3}

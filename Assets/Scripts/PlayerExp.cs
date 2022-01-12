@@ -5,4 +5,5 @@ using UnityEngine;
 public class PlayerExp : MonoBehaviour
 {
     public static int Exp = 0;
+    public static bool PlayStyle = false;
 }
