@@ -12,6 +12,7 @@ public class gunController : MonoBehaviour
         get { return currentClip; }
     }
 
+
     public float reloadDelay = 3f;
     public float shootDelay = 1f;
     public float blinkTime = -2f;
@@ -84,10 +85,75 @@ public class gunController : MonoBehaviour
         Bullit5.active = true;
     }
 
-    //void OnMouseDown()
-    //{
-    //    Shoot();
-    //}
+    //hard code arduino magazine display
+    public void ArduinoAmoController(int ArduinoClip)
+    {
+        switch (ArduinoClip)
+        {
+            case 0:
+                Bullit.active = false;
+                Bullit1.active = false;
+                Bullit2.active = false;
+                Bullit3.active = false;
+                Bullit4.active = false;
+                Bullit5.active = false;
+                break;
+
+            case 1:
+                Bullit.active = true;
+                Bullit1.active = false;
+                Bullit2.active = false;
+                Bullit3.active = false;
+                Bullit4.active = false;
+                Bullit5.active = false;
+                break;
+
+            case 2:
+                Bullit.active = true;
+                Bullit1.active = true;
+                Bullit2.active = false;
+                Bullit3.active = false;
+                Bullit4.active = false;
+                Bullit5.active = false;
+                break;
+
+            case 3:
+                Bullit.active = true;
+                Bullit1.active = true;
+                Bullit2.active = true;
+                Bullit3.active = false;
+                Bullit4.active = false;
+                Bullit5.active = false;
+                break;
+
+            case 4:
+                Bullit.active = true;
+                Bullit1.active = true;
+                Bullit2.active = true;
+                Bullit3.active = true;
+                Bullit4.active = false;
+                Bullit5.active = false;
+                break;
+
+            case 5:
+                Bullit.active = true;
+                Bullit1.active = true;
+                Bullit2.active = true;
+                Bullit3.active = true;
+                Bullit4.active = true;
+                Bullit5.active = false;
+                break;
+
+            case 6:
+                Bullit.active = true;
+                Bullit1.active = true;
+                Bullit2.active = true;
+                Bullit3.active = true;
+                Bullit4.active = true;
+                Bullit5.active = true;
+                break;
+        }
+    }
 
     public void Shoot()
     {

@@ -12,15 +12,18 @@ public class ResultScreenLoader : MonoBehaviour
 
     public void home()
     {
+        ArduinoToUnity.closePort();
         SceneManager.LoadScene(0); // index invullen
     }
 
     public void restart()
     {
+        ArduinoToUnity.closePort();
         SceneManager.LoadScene(0); //index invullen
     }
 
     public void continu() {
+        ArduinoToUnity.closePort();
         SceneManager.LoadScene(0); // index invullen 
     }
 }

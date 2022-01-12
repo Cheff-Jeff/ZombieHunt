@@ -62,7 +62,7 @@ public class playerController : MonoBehaviour
             {
                 isDead = true;
                 PlayerExp.Exp = totalExp;
-                SceneManager.LoadScene("LoseScene"); //loads lose scene when player has died
+                SceneManager.LoadScene("LoseScene"); //loads lose scene when player has died   
             }
             Debug.Log("Speler HP " + currentHP);
         }

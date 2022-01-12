@@ -57,11 +57,14 @@ public class zombieController : MonoBehaviour
         timer = changeTime;
         direction = getRandomNum();
         attackTimer = Time.time + Random.Range(5, 15);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //update bulletUI
+        Gun.ArduinoAmoController(ArduinoToUnity.getArduinoMagazine());
         timer -= Time.deltaTime;
         if (timer < 0)
         {
@@ -92,7 +95,9 @@ public class zombieController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) || ArduinoToUnity.getButtonState() == 1)
         {
-            Gun.Shoot();
+            //Ik heb dit voorlopig disabled om mijn arduino magazine te testen
+            //Gun.Shoot();
+            Gun.ArduinoAmoController(ArduinoToUnity.getArduinoMagazine());
             if (inRange && !imune)
             {
                 changeHealth(Gun.damage);
