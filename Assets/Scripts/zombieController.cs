@@ -62,11 +62,11 @@ public class zombieController : MonoBehaviour
 
         if (playStyle.GetComponent<MouseDebug>().isActiveAndEnabled)
         {
-            Player.style = false;
+            Player.style = true;
         }
         else if(playStyle.GetComponent<ArduinoToUnity>().isActiveAndEnabled) 
         {
-            Player.style = true;
+            Player.style = false;
         }
     }
 
