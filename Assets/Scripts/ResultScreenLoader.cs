@@ -60,6 +60,6 @@ public class ResultScreenLoader : MonoBehaviour
                     Debug.Log(request.downloadHandler.text);
             }
         }
-        SceneManager.LoadScene(0); // index invullen 
+        SceneManager.LoadScene(5); // index invullen 
     }
 }
