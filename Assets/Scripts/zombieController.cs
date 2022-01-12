@@ -106,7 +106,7 @@ public class zombieController : MonoBehaviour
         { 
             gameObject.GetComponent<Renderer>().material.color = Color.white;
         }
-        if (Input.GetMouseButtonDown(0))//|| ArduinoToUnity.getButtonState() == 1
+        if (Input.GetMouseButtonDown(0) || ArduinoToUnity.getButtonState() == 1)
         {
             if (playStyle.GetComponent<ArduinoToUnity>().isActiveAndEnabled)
             {
