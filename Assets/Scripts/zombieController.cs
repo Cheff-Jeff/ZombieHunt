@@ -26,6 +26,7 @@ public class zombieController : MonoBehaviour
     public int exp = 50;
 
     GameObject playStyle;
+    AudioSource gunSound;
     gunController Gun;
     playerController Player;
     Rigidbody2D rb;
@@ -52,6 +53,8 @@ public class zombieController : MonoBehaviour
         Gun = GameObject.Find("CrossHair").GetComponent<gunController>();
         Player = GameObject.Find("CrossHair").GetComponent<playerController>();
         playStyle = GameObject.Find("CrossHair");
+        gunSound = GameObject.Find("CrossHair").GetComponent<AudioSource>();
+
         rb = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>(); //transform for object size manipulation
         rend = GetComponent<Renderer>(); //to change layer order
@@ -108,6 +111,8 @@ public class zombieController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) || ArduinoToUnity.getButtonState() == 1)
         {
+            gunSound.Play(0);
+
             if (playStyle.GetComponent<ArduinoToUnity>().isActiveAndEnabled)
             {
                 Gun.ArduinoAmoController(ArduinoToUnity.getArduinoMagazine());
@@ -119,6 +124,7 @@ public class zombieController : MonoBehaviour
             if (inRange && !imune)
             {
                 changeHealth(Gun.damage);
+
                 iTime = inmune;
                 imune = true;
             }
