@@ -47,7 +47,7 @@ public class ResultScreenLoader : MonoBehaviour
 
         IEnumerator PostData_Coroutine()
         {
-            string uri = "http://192.168.1.70:3000/sendscore";
+            string uri = "https://snipetheundead.sytes.net:3000/sendscore";
             WWWForm form = new WWWForm();
             form.AddField("name", PlayerName.text);
             form.AddField("score", PlayerExp.Exp.ToString());
